@@ -1,0 +1,67 @@
+<section class="md:w-1/2 w-3/4 mx-auto my-6">
+  <h1 class="text-gray-900 text-2xl font-normal mb-3">Login:</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="submitloginForm()">
+    <div class="email mb-3">
+      <label class="text-gray-900" for="emailInput">Your Email: </label>
+      <input
+        formControlName="email"
+        type="email"
+        id="emailInput"
+        class="form-control"
+      />
+      @if (loginForm.get('email')?.errors&& loginForm.get('email')?.touched){
+
+      <div class="alert">
+        @if(loginForm.get('email')?.errors?.['required']){
+
+        <p>Email is required</p>
+        } @if (loginForm.get('email')?.errors?.['email']) {
+        <p>Email must be valid</p>
+
+        }
+      </div>
+      }
+    </div>
+    <div class="password mb-3">
+      <label class="text-gray-900" for="passwordInput">Password: </label>
+      <input
+        formControlName="password"
+        type="password"
+        id="passwordInput"
+        class="form-control"
+      />
+      @if (loginForm.get('password')?.errors&&
+      loginForm.get('password')?.touched){
+
+      <div class="alert">
+        @if (loginForm.get('password')?.errors?.['required']) {
+
+        <p>Password is required</p>
+
+        } @if (loginForm.get('password')?.errors?.['pattern']) {
+
+        <p>Password must be valid</p>
+
+        }
+      </div>
+      }
+    </div>
+
+    <div class="submitBtn text-right mb-3 flex justify-between items-center flex-wrap md:flex-nowrap">
+      <a
+        class="text-blue-500 underline hover:text-blue-700"
+        routerLink="/forget-password"
+        >Forget Password</a
+      >
+      <button [disabled]="loginForm.invalid" class="btn-main disabled:bg-[#5FC95F] disabled:border-[#5FC95F] disabled:text-white">
+        @if (isLoading) {
+
+        <span><i class="fa fa-spinner fa-spin"></i></span>
+        } @else {
+
+        <span>Login</span>
+        }
+      </button>
+    </div>
+  </form>
+</section>

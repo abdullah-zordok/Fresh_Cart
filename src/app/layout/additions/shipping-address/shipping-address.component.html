@@ -1,0 +1,119 @@
+<section class="md:w-1/2 w-3/4 mx-auto my-6">
+  <h1 class="text-gray-900 text-2xl font-normal mb-3">Your Address:</h1>
+  <form
+    [formGroup]="shippingAddressForm"
+    (ngSubmit)="submitShippingAddressForm()"
+  >
+    <div class="details mb-3">
+      <label class="text-gray-900" for="detailsInput">Details </label>
+      <input
+        type="text"
+        id="detailsInput"
+        class="form-control"
+        formControlName="details"
+      />
+      @if (shippingAddressForm.get('details')?.errors&&
+      shippingAddressForm.get('details')?.touched){
+
+      <div class="alert">
+        @if (shippingAddressForm.get('details')?.errors?.['required']) {
+
+        <p>Details is required</p>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="phone mb-3">
+      <label class="text-gray-900" for="phoneInput">Phone Number: </label>
+      <input
+        formControlName="phone"
+        type="tel"
+        id="phoneInput"
+        class="form-control"
+      />
+      @if (shippingAddressForm.get('phone')?.errors&&
+      shippingAddressForm.get('phone')?.touched){
+
+      <div class="alert">
+        @if (shippingAddressForm.get('phone')?.errors?.['required']) {
+
+        <p>Phone is required</p>
+        } @if (shippingAddressForm.get('phone')?.errors?.['pattern']) {
+
+        <p>Phone must be valid</p>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="city mb-3">
+      <label class="text-gray-900" for="cityInput">City </label>
+      <input
+        type="text"
+        id="cityInput"
+        class="form-control"
+        formControlName="city"
+      />
+      @if (shippingAddressForm.get('city')?.errors&&
+      shippingAddressForm.get('city')?.touched){
+
+      <div class="alert">
+        @if(shippingAddressForm.get('city')?.errors?.['required']){
+
+        <p>Your City is required</p>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="relative mb-3">
+      <button
+        (click)="isDropdownOpen = !isDropdownOpen"
+        class="w-full py-3 text-white bg-primary rounded-lg hover:bg-primary transition flex justify-between items-center px-4"
+      >
+        Continue with {{ paymentMethod || "..." }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+
+      <!-- Dropdown List -->
+      <div
+        *ngIf="isDropdownOpen"
+        class="absolute w-full bg-white shadow-lg rounded-lg mt-2 border z-10"
+      >
+        <div
+          (click)="selectPaymentMethod('Cash Payment')"
+          class="p-2 hover:bg-gray-100 cursor-pointer"
+        >
+          Cash Payment
+        </div>
+        <div
+          (click)="selectPaymentMethod('Online Payment')"
+          class="p-2 hover:bg-gray-100 cursor-pointer"
+        >
+          Online Payment
+        </div>
+      </div>
+    </div>
+
+    <div class="submitBtn text-right mb-3">
+      <button
+        class="btn-main disabled:bg-[#5FC95F] disabled:border-[#5FC95F]"
+        [disabled]="shippingAddressForm.invalid"
+      >
+        Pay Now
+      </button>
+    </div>
+  </form>
+</section>

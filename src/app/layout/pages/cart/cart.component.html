@@ -1,0 +1,55 @@
+  @if(data){
+<section class="bg-gray-200 w-11/12 mx-auto my-5 p-3">
+  <div class="row justify-between">
+     <div>
+      <h1 class="text-gray-900 text-xl font-bold my-3">Shop Cart:</h1>
+  <p class="text-primary text-lg font-semibold my-3">
+    Total Price: {{ data.totalCartPrice }}
+  </p>
+     </div>
+
+     <button class="text-primary text-lg font-semibold my-3" (click)="clearCart()">Clear Cart</button>
+  </div>
+
+  @for (p of data.products; track $index) {
+  <div class="my-3 row items-center border-b border-white">
+    <div class="md:w-1/12 p-2">
+      <img [src]="p.product.imageCover" alt="" class="w-full" />
+    </div>
+
+    <div class="md:w-10/12 p-2">
+      <h2 class="text-gray-900 text-lg font-semibold my-3">
+        {{ p.product.title }}
+      </h2>
+      <p class="text-primary">{{ p.price }}</p>
+      <button class="my-3" (click)="removeProductFromCart(p.product._id)">
+        <i class="fa fa-trash text-primary px-1"></i>
+        <span>Remove</span>
+      </button>
+    </div>
+
+    <div class="md:w-1/12 p-2">
+      <button
+        class="bg-primary rounded p-1 text-white"
+        (click)="
+          updateProductCartQuantity(p.product._id, (p.count = p.count + 1))
+        "
+      >
+        +
+      </button>
+      <span>{{ p.count }}</span>
+      <button
+        class="bg-red-500 rounded p-1 text-white"
+        (click)="
+          updateProductCartQuantity(p.product._id, (p.count = p.count - 1))
+        "
+      >
+        -
+      </button>
+    </div>
+  </div>
+  }
+  <button class="btn-main block mx-auto w-full" [routerLink]='["/shipping-address",data._id]'>Check Out</button>
+</section>
+
+}

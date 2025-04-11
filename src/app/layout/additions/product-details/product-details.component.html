@@ -1,0 +1,30 @@
+@if (product) {
+  <div class="w-11/12 mx-auto">
+    <div class="row my-5 items-center">
+      <div class="md:w-1/4 p-3">
+        <img [src]="product.imageCover" alt="" class="w-full">
+      </div>
+      <div class="md:w-3/4 p-3">
+        <h1 class="text-gray-900 text-lg font-semibold my-3">{{product.title}}</h1>
+        <p class="text-gray-500 text-sm">{{product.description}}</p>
+        <span class="text-primary text-xs">{{product.category.name}}</span>
+        <div class="flex justify-between items-center my-3">
+          <span class="text-gray-900 font-semibold">{{product.price}}EGP</span>
+    <div>
+
+      <span><i class="fa fa-star text-yellow-300 text-sm"></i></span>
+
+      <span class="ps-1">{{product.ratingsAverage}}</span>
+    </div>
+
+
+        </div>
+
+
+        <button (click)="addProductToCart(product._id)" class="btn-main w-full"><i class="fa fa-plus"></i></button>
+      </div>
+    </div>
+
+  </div>
+
+}

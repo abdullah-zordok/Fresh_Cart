@@ -1,0 +1,87 @@
+<section class="bg-gray-200 w-11/12 mx-auto my-5 p-3">
+    @if(isEmpty){
+    <h3>You have no orders</h3>
+    } @else if(!isEmpty){
+    <h2 class="text-gray-900 text-xl font-bold my-3">Order Details:</h2>
+    <div class="bg-gray-100 p-9 text-gray-700">
+      <p>
+        Order ID: <span class="text-primary">{{ data[data.length - 1].id }}</span>
+      </p>
+      <p>
+        Total Price:
+        <span class="text-primary">{{
+          data[data.length - 1].totalOrderPrice
+        }}</span>
+      </p>
+      <p>
+        Payment Method:
+        <span class="text-primary">{{
+          data[data.length - 1].paymentMethodType
+        }}</span>
+      </p>
+      <div>
+        <h3>Shipping Address:-</h3>
+        <ul class="font-semibold">
+          <li>
+            - Details:
+            <span class="text-primary">{{
+              data[data.length - 1].shippingAddress.details
+            }}</span>
+          </li>
+          <li>
+            - City:
+            <span class="text-primary">{{
+              data[data.length - 1].shippingAddress.city
+            }}</span>
+          </li>
+          <li>
+            - Phone:
+            <span class="text-primary">{{
+              data[data.length - 1].shippingAddress.phone
+            }}</span>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Order Date:
+        <span class="text-primary">{{
+          data[data.length - 1].createdAt | date : "dd/MM/yyyy"
+        }}</span>
+      </p>
+      <p>
+        Delivered:
+        <span class="text-primary">{{ data[data.length - 1].isDelivered }}</span>
+      </p>
+      <p>
+        Paid: <span class="text-primary">{{ data[data.length - 1].isPaid }}</span>
+      </p>
+  
+      <h3>Order Items:-</h3>
+      <div class="item">
+        @for(iamges of data[data.length - 1].cartItems ; track $index){
+        <div class="border-b border-white flex row justify-between items-center">
+          <div class="image md:w-1/12">
+            <img [src]="iamges.product.imageCover" class="w-full my-3" alt="" />
+          </div>
+          <div class="title md:w-8/12 md:ps-5">
+            <h2 class="text-gray-700 text-lg font-normal my-3">
+              {{ iamges.product.title }}
+            </h2>
+          </div>
+          <div class="price md:w-3/12">
+              <p class="text-gray-700 text-lg font-normal my-3">
+                   Price is: <span class="text-primary">{{ iamges.price }}</span>
+              </p>
+              <p class="text-gray-700 text-lg font-normal my-3">
+                  Count is: <span class="text-primary">{{ iamges.count }}</span>
+              </p>
+          </div>
+         
+        </div>
+  
+        }
+      </div>
+    </div>
+    }
+  </section>
+  

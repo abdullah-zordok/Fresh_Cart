@@ -1,0 +1,49 @@
+@if(resetCodeFlag){
+
+<section class="md:w-1/2 w-3/4 mx-auto my-6">
+  <h1 class="text-gray-900 text-2xl font-normal mb-3">Reset Code:</h1>
+  @if(errMsg){
+  <div class="alert">
+    <p>{{ errMsg }}</p>
+  </div>
+  }
+  <form [formGroup]="resetCodeForm" (ngSubmit)="submitResetCodeForm()">
+    <div class="resetCode mb-3">
+      <label class="text-gray-900" for="resetCodeInput">Code: </label>
+      <input
+        formControlName="resetCode"
+        type="text"
+        id="resetCodeInput"
+        class="form-control"
+      />
+      @if (resetCodeForm.get('resetCode')?.errors&&
+      resetCodeForm.get('resetCode')?.touched){
+
+      <div class="alert">
+        @if(resetCodeForm.get('resetCode')?.errors?.['required']){
+
+        <p>Code is required</p>
+        } @if (resetCodeForm.get('resetCode')?.errors?.['pattern']) {
+        <p>Code must be valid</p>
+
+        }
+      </div>
+      }
+    </div>
+
+    <div class="submitBtn text-right mb-3">
+      <button [disabled]="resetCodeForm.invalid" class="btn-main disabled:bg-[#5FC95F] disabled:border-[#5FC95F] disabled:text-white">
+        @if (isLoading) {
+
+        <span><i class="fa fa-spinner fa-spin"></i></span>
+        } @else {
+
+        <span>Submit</span>
+        }
+      </button>
+    </div>
+  </form>
+</section>
+} @else if (resetPasswordFlag) {
+<app-reset-password></app-reset-password>
+}

@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.btn-main {
+  @apply bg-primary text-white py-2 px-10 rounded-2xl hover:bg-white hover:text-[#1BB31C] border-2 border-[#1BB31C] border-solid duration-500;
+}
+
+.alert {
+  @apply bg-red-300 text-red-700 p-1 rounded-lg mt-1;
+}
+
+.form-control {
+  @apply w-full p-1 rounded-lg;
+}
+
+.row {
+  @apply flex flex-wrap;
+}
+
+html, body { height: 100%; }
+body { margin: 0;  font-family: "Encode Sans Expanded", serif; }
